@@ -38,11 +38,11 @@ const Dashboard = () => {
   }, []);
 
   const toggleModal = () => {
-    setModalOpen(true);
+    setModalOpen(!modalOpen);
   };
 
   const toggleEditModal = () => {
-    setEditModalOpen(true);
+    setEditModalOpen(!editModalOpen);
   };
 
   const handleAddFood = async (

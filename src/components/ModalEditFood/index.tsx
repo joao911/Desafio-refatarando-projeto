@@ -6,6 +6,13 @@ import Modal from "../Modal";
 import Input from "../Input";
 import { FormHandles } from "@unform/core";
 
+interface AddFood {
+  image: string;
+  name: string;
+  price: string;
+  description: string;
+}
+
 interface IFood {
   id: number;
   name: string;
@@ -14,29 +21,26 @@ interface IFood {
   available: boolean;
   image: string;
 }
-interface addFood {
-  image: string;
-  name: string;
-  price: string;
-  description: string;
-}
-interface ModalAddFoodProps {
+
+interface ModalEditFoodProps {
   isOpen: boolean;
   setIsOpen: () => void;
+  handleUpdateFood: (data: AddFood) => void;
   editingFood: IFood;
-  handleUpdateFood: (data: addFood) => void;
 }
-const ModalEditFood = ({
+
+export default function ModalEditFood({
   isOpen,
   setIsOpen,
-  editingFood,
   handleUpdateFood,
-}: ModalAddFoodProps) => {
-  const handleSubmit = async (data: addFood) => {
+  editingFood,
+}: ModalEditFoodProps) {
+  const formRef = useRef<FormHandles>(null);
+
+  const handleSubmit = async (data: AddFood) => {
     handleUpdateFood(data);
     setIsOpen();
   };
-  const formRef = useRef<FormHandles>(null);
 
   return (
     <Modal isOpen={isOpen} setIsOpen={setIsOpen}>
@@ -58,6 +62,4 @@ const ModalEditFood = ({
       </Form>
     </Modal>
   );
-};
-
-export default ModalEditFood;
+}
